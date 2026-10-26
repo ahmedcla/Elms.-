@@ -20,6 +20,10 @@ jobs:
       - name: Unzip project
         run: unzip -qo ./*.zip
 
+      - name: Use Gradle 9.7.0
+        working-directory: elemental-arsenal
+        run: sed -i 's/gradle-9.5.1-bin/gradle-9.7.0-bin/' gradle/wrapper/gradle-wrapper.properties
+
       - name: Build
         working-directory: elemental-arsenal
         run: |
