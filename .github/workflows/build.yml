@@ -17,16 +17,19 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
+      - name: Unzip project
+        run: unzip -qo ./*.zip
 
       - name: Build
-        run: ./gradlew build --no-daemon
+        working-directory: elemental-arsenal
+        run: |
+          chmod +x ./gradlew
+          ./gradlew build --no-daemon
 
       - name: Upload the mod jar
         uses: actions/upload-artifact@v4
         with:
           name: elementalarsenal-jar
           path: |
-            build/libs/*.jar
-            !build/libs/*-sources.jar
+            elemental-arsenal/build/libs/*.jar
+            !elemental-arsenal/build/libs/*-sources.jar
